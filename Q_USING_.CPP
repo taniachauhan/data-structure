@@ -1,7 +1,7 @@
 #include<iostream.h>
 #include<cstdlib.h>
 
-class stack_dq
+class stack_eq
 {   struct node
 {
   public: int data;
@@ -10,7 +10,7 @@ class stack_dq
     private: node* head;
     public:
     int n1;
-    stack_dq()
+    stack_eq()
     {
      head=NULL;
     }
@@ -54,7 +54,7 @@ class stack_dq
 		    cout<<"queue is empty"<<endl;
 		}
 		else
-		{   cout<<"your entered queue is"<<endl;
+		{   cout<<"entered queue is"<<endl;
 		while(ptr!=NULL)
 		{
 		    cout<<ptr->data<<" ";
@@ -68,57 +68,45 @@ class stack_dq
 		 if(head==NULL)
 		 {
 		     return true;
-                 }
-                 else
-                 {
-                     return false;
-                 }
-             }
+		 }
+		 else
+		 {
+		     return false;
+		 }
+	     }
 };
 class queue_arr
 {    public:
     int x=0,y=0,z=0;
-    stack_dq d1;
-    stack_dq d2;
+    stack_eq e1;
+    stack_eq e2;
 
    void enqueue()
     {
       cout<<"enter the data to enqueue"<<endl;
       cin>>x;
-      d1.push(x);
+      while(!e1.isempty())
+      {
+	  y=e1.pop();
+	  e2.push(y);
+      }
+      e1.push(x);
+      while(!e2.isempty())
+      {
+	 z=e2.pop();
+	 e1.push(z);
+      }
     }
     void dequeue()
-    {
-	int x=0,y=0;
-	while(!d1.isempty())
-	{
-	    x=d1.pop();
-	    d2.push(x);
-	}
-	d2.pop();
-	while(!d2.isempty())
-	{
-	    y=d2.pop();
-	    d1.push(y);
-	}
-	if(!d1.isempty())
+    {    e1.pop();
+	if(!e1.isempty())
 	{
 	cout<<"dequeuing top element from the queue"<<endl;
 	}
     }
     void display()
-    {    int x=0,y=0;
-	while(!d1.isempty())
-	{
-	    x=d1.pop();
-	    d2.push(x);
-	}
-	d2.display();
-	while(!d2.isempty())
-	{
-	    y=d2.pop();
-	    d1.push(y);
-	}
+    {
+	e1.display();
     }
 
 
@@ -142,6 +130,7 @@ int main()
 		obj.display();
 		break;
 	case 2:
+
 		obj.enqueue();
 		break;
 	case 3:
